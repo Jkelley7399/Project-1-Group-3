@@ -1,0 +1,400 @@
+USE al_Group_21482_G3;
+
+CREATE TABLE Players (
+    Player_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Player_Name VARCHAR(255),
+    Age INT,
+    Nationality VARCHAR(255),
+    Position VARCHAR(255),
+    Contract_Start_Date DATE,
+    Contract_End_Date DATE
+);
+
+CREATE TABLE Coaching_Staff (
+    Staff_ID INT PRIMARY KEY AUTO_INCREMENT,
+    First_Name VARCHAR(255),
+    Coach_Role VARCHAR(255),
+    Nationality VARCHAR(255),
+    Contract_Start_Date DATE,
+    Contract_End_Date DATE
+);
+
+CREATE TABLE Matches (
+    Match_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Match_Date DATE,
+    Opponent VARCHAR(255),
+    Venue VARCHAR(255),
+    Result VARCHAR(50)
+);
+
+CREATE TABLE Coaching_Staff_Matches (
+    Staff_ID INT,
+    Match_ID INT,
+    PRIMARY KEY (Staff_ID , Match_ID),
+    FOREIGN KEY (Staff_ID)
+        REFERENCES Coaching_Staff (Staff_ID),
+    FOREIGN KEY (Match_ID)
+        REFERENCES Matches (Match_ID)
+);
+
+
+CREATE TABLE Player_Match (
+    Player_ID INT,
+    Match_ID INT,
+    PRIMARY KEY (Player_ID , Match_ID),
+    FOREIGN KEY (Player_ID)
+        REFERENCES Players (Player_ID),
+    FOREIGN KEY (Match_ID)
+        REFERENCES Matches (Match_ID)
+);
+
+CREATE TABLE Team_Finances (
+    Finance_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Revenue_Source VARCHAR(255),
+    Amount DECIMAL(10 , 2 ),
+    Finance_Date DATE
+);
+
+CREATE TABLE Facilities (
+    Facility_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Facility_Name VARCHAR(255),
+    Facility_Type VARCHAR(255),
+    Location VARCHAR(255),
+    Capacity INT
+);
+
+CREATE TABLE Youth_Academy (
+    Academy_ID INT PRIMARY KEY AUTO_INCREMENT,
+    YA_Name VARCHAR(255),
+    Location VARCHAR(255),
+    Director VARCHAR(255)
+);
+
+CREATE TABLE Fan_Engagement (
+    Engagement_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Engagement_Type VARCHAR(255),
+    Engagement_Description TEXT,
+    Engagement_Date DATE
+);
+
+CREATE TABLE Medical_Records (
+    Record_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Player_ID INT,
+    Injury_Description TEXT,
+    Treatment_Plan TEXT,
+    Fitness_Assessment VARCHAR(50),
+    FOREIGN KEY (Player_ID)
+        REFERENCES Players (Player_ID)
+);
+
+CREATE TABLE Scouting_Recruitment (
+    Scout_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Scout_Name VARCHAR(255),
+    Position VARCHAR(255),
+    Nationality VARCHAR(255)
+);
+
+CREATE TABLE Club_Administration (
+    Admin_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Admin_Name VARCHAR(255),
+    Position VARCHAR(255),
+    Department VARCHAR(255)
+);
+
+CREATE TABLE Marketing_Promotions (
+    Campaign_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Campaign_Name VARCHAR(255),
+    Campaign_Description TEXT,
+    Start_Date DATE,
+    End_Date DATE
+);
+
+CREATE TABLE Marketing_Matches (
+    Campaign_ID INT,
+    Match_ID INT,
+    PRIMARY KEY (Campaign_ID , Match_ID),
+    FOREIGN KEY (Campaign_ID)
+        REFERENCES Marketing_Promotions (Campaign_ID),
+    FOREIGN KEY (Match_ID)
+        REFERENCES Matches (Match_ID)
+);
+
+
+CREATE TABLE Community_Outreach (
+    Outreach_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Event_Name VARCHAR(255),
+    Event_Description TEXT,
+    Event_Date DATE,
+    Location VARCHAR(255)
+);
+
+-- Followed by your INSERT statements, unchanged.
+
+
+INSERT INTO Players (Player_Name, Age, Nationality, Position, Contract_Start_Date, Contract_End_Date) VALUES 
+  ('Kai Havertz', 24, 'German', 'Midfielder', '2023-01-01', '2026-12-31'),
+  ('Kylian Mbappé', 24, 'French', 'Forward', '2022-07-01', '2025-06-30'),
+  ('Rodrygo', 22, 'Brazilian', 'Forward', '2022-07-01', '2025-06-30'), -- Rodrygo is known as a forward or winger.
+  ('Lionel Messi', 36, 'Argentinian', 'Forward', '2023-01-01', '2026-12-31'),
+  ('Rodri', 26, 'Spanish', 'Midfielder', '2022-07-01', '2025-06-30'),
+  ('Nathan Ake', 28, 'Dutch', 'Defender', '2023-07-01', '2026-06-30'),
+  ('Jackson Kelley', 25, 'Italian', 'Goalkeeper', '2021-07-01', '2024-06-30'), -- Assuming a fictional player.
+  ('Cristiano Ronaldo', 38, 'Portuguese', 'Forward', '2022-01-01', '2025-12-31'),
+  ('Raheem Sterling', 28, 'English', 'Forward', '2023-07-01', '2026-06-30'),
+  ('Kevin De Bruyne', 31, 'Belgian', 'Midfielder', '2022-07-01', '2025-06-30'),
+  ('Erling Haaland', 22, 'Norwegian', 'Forward', '2023-01-01', '2026-12-31'),
+  ('Zlatan Ibrahimović', 41, 'Swedish', 'Forward', '2023-07-01', '2026-06-30'), -- Corrected for realism, noting his actual age.
+  ('Scott Horton', 27, 'Icelandic', 'Defender', '2022-07-01', '2025-06-30'), -- Assuming a fictional player.
+  ('Ederson', 29, 'Brazilian', 'Goalkeeper', '2021-07-01', '2024-06-30'),
+  ('Lautaro Martínez', 25, 'Argentinian', 'Forward', '2022-01-01', '2025-12-31'); -- Corrected name and nationality.
+
+
+
+INSERT INTO Coaching_Staff (First_Name, Coach_Role, Nationality, Contract_Start_Date, Contract_End_Date)
+VALUES 
+  ('Pep Guardiola', 'Manager', 'Spanish', '2016-07-01', '2025-06-30'),
+  ('Mikel Arteta', 'Assistant Manager', 'Spanish', '2020-07-01', '2025-06-30'),
+  ('Rodolfo Borrell', 'First Team Coach', 'Spanish', '2013-07-01', '2025-06-30'),
+  ('Juanma Lillo', 'Assistant Coach', 'Spanish', '2020-07-01', '2025-06-30'),
+  ('Xabi Mancisidor', 'Goalkeeper Coach', 'Spanish', '2016-07-01', '2025-06-30');
+
+INSERT INTO Matches (Match_Date, Opponent, Venue, Result)
+VALUES 
+  ('2023-08-06', 'Tottenham Hotspur', 'Home', 'Win'),
+  ('2023-08-13', 'Brighton & Hove Albion', 'Away', 'Draw'),
+  ('2023-08-20', 'Norwich City', 'Home', 'Win'),
+  ('2023-08-27', 'Arsenal', 'Away', 'Loss'),
+  ('2023-09-03', 'Leicester City', 'Home', 'Win'),
+  ('2023-09-10', 'Manchester United', 'Away', 'Loss'),
+  ('2023-09-17', 'Liverpool', 'Home', 'Draw'),
+  ('2023-09-24', 'Chelsea', 'Away', 'Win'),
+  ('2023-10-01', 'West Ham United', 'Home', 'Win'),
+  ('2023-10-08', 'Everton', 'Away', 'Win'),
+  ('2023-10-15', 'Wolverhampton Wanderers', 'Home', 'Draw'),
+  ('2023-10-22', 'Newcastle United', 'Away', 'Loss'),
+  ('2023-10-29', 'Southampton', 'Home', 'Win'),
+  ('2023-11-05', 'Crystal Palace', 'Away', 'Win'),
+  ('2023-11-12', 'Aston Villa', 'Home', 'Draw'),
+  ('2023-11-19', 'Leeds United', 'Away', 'Loss'),
+  ('2023-11-26', 'Fulham', 'Home', 'Win'),
+  ('2023-12-03', 'Burnley', 'Away', 'Draw'),
+  ('2023-12-10', 'Watford', 'Home', 'Win'),
+  ('2023-12-17', 'Brentford', 'Away', 'Win');
+
+INSERT INTO Team_Finances (Revenue_Source, Amount, Finance_Date) VALUES 
+  ('Match Day Revenue', 1200000, '2023-09-01'),
+  ('Broadcasting Rights', 2200000, '2023-09-01'),
+  ('Commercial Partnerships', 800000, '2023-09-01'),
+  ('Merchandising', 600000, '2023-09-01'),
+  ('Player Sale', 5000000, '2023-09-01'),
+  ('Sponsorship', 1500000, '2023-10-01'),
+  ('Ticket Sales', 700000, '2023-10-01'),
+  ('Stadium Tours', 50000, '2023-10-01'),
+  ('Merchandise Sales', 550000, '2023-10-01'),
+  ('Event Hosting', 250000, '2023-10-01'),
+  ('Youth Academy Sponsorships', 300000, '2023-11-01'),
+  ('eSports Revenue', 200000, '2023-11-01'),
+  ('Digital Content Sales', 150000, '2023-11-01'),
+  ('Fan Membership Fees', 400000, '2023-11-01'),
+  ('Pre-season Tournament Winnings', 750000, '2023-11-01');
+
+
+INSERT INTO Facilities (Facility_Name, Facility_Type, Location, Capacity)
+VALUES 
+  ('Etihad Stadium', 'Match Venue', 'Manchester', 55000),
+  ('City Football Academy', 'Training', 'Manchester', 200);
+
+INSERT INTO Youth_Academy (YA_Name, Location, Director) VALUES 
+  ('City Football Academy U-18', 'Manchester', 'Brian Hughes'),
+  ('City Football Academy U-16', 'Manchester', 'Jason Wilcox'),
+  ('City Football Academy U-14', 'Manchester', 'Darren Hughes'),
+  ('City Football Academy U-12', 'Manchester', 'Mark Smith'),
+  ('City Satellite Academy', 'London', 'Steve Cooper'),
+  ('City International Academy', 'New York', 'Tony Mowbray'),
+  ('City International Academy', 'Melbourne', 'Simon Colosimo'),
+  ('City International Academy', 'Tokyo', 'Takeshi Okada'),
+  ('City International Academy', 'Abu Dhabi', 'Ali Al-Wehaibi'),
+  ('City International Academy', 'São Paulo', 'Carlos Henrique'),
+  ('City Football School', 'Manchester', 'Neil Roberts'),
+  ('City Football School', 'London', 'Gary Owen'),
+  ('City Football School', 'Barcelona', 'Sergi Barjuan'),
+  ('City Football School', 'Moscow', 'Dmitri Alenichev'),
+  ('City Football School', 'Beijing', 'Li Tie');
+
+
+INSERT INTO Fan_Engagement (Engagement_Type, Engagement_Description, Engagement_Date) VALUES 
+  ('Social Media Challenge', 'Engage with fans through a social media challenge with prizes.', '2023-09-15'),
+  ('Virtual Meet & Greet', 'Online meeting with players and fans via a webinar platform.', '2023-09-22'),
+  ('Match Day Giveaway', 'Free merchandise giveaways to fans attending the match.', '2023-10-06'),
+  ('Charity Match', 'A match where all proceeds go to a local charity, featuring legends.', '2023-10-13'),
+  ('Esports Tournament', 'Host an esports tournament with fans playing FIFA against players.', '2023-10-27'),
+  ('Fan Art Contest', 'Organize a contest for the best fan art with club merchandise as prizes.', '2023-11-03'),
+  ('Away Match Viewing Party', 'Organize viewing parties for away matches in local pubs and venues.', '2023-11-17'),
+  ('Holiday Season Sale', 'Special discounts on merchandise during the holiday season.', '2023-12-01'),
+  ('Year-end Fan Gala', 'End of year gala event for fans, with appearances by players and staff.', '2023-12-15'),
+  ('New Year Kick-off Party', 'A party to kick off the new year and the second half of the season.', '2024-01-05'),
+  ('Youth Clinic', 'A free clinic for young fans to learn football skills from players.', '2024-01-19'),
+  ('Fan Feedback Survey', 'A survey to gather feedback from fans on their club experience.', '2024-02-02'),
+  ('Valentine’s Day Special', 'Special content and promotions themed around Valentine’s Day.', '2024-02-14'),
+  ('St. Patrick’s Day Celebration', 'Celebration event for St. Patrick’s Day with themed merchandise.', '2024-03-17'),
+  ('Easter Egg Hunt', 'An Easter egg hunt event at the stadium for families and fans.', '2024-04-09');
+
+
+INSERT INTO Medical_Records (Player_ID, Injury_Description, Treatment_Plan, Fitness_Assessment) VALUES
+  (1, 'Mild ankle sprain', 'Rest and physiotherapy', 'Fit'),
+  (3, 'Hamstring strain', 'Rehabilitation and physiotherapy', 'Partial Fit'), -- Rodrygo
+  (5, 'Knee ligament tear', 'Surgery followed by rehabilitation', 'Not Fit'), -- Rodri
+  (8, 'Muscle fatigue', 'Rest and light training', 'Fit'), -- Cristiano Ronaldo
+  (11, 'Fractured toe', 'Surgery and rest', 'Not Fit'), -- Erling Haaland
+  (14, 'Concussion', 'Rest and monitored recovery', 'Partial Fit'); -- Ederson
+
+
+
+
+INSERT INTO Scouting_Recruitment (Scout_Name, Position, Nationality) VALUES 
+  ('Alex Thompson', 'Scout', 'English'),
+  ('Isabella Garcia', 'Recruiter', 'Spanish'),
+  ('Michael Lee', 'Scout', 'American'),
+  ('Sophie Dupont', 'Recruiter', 'French'),
+  ('Luca Bianchi', 'Scout', 'Italian'),
+  ('Emma Müller', 'Recruiter', 'German'),
+  ('Raj Patel', 'Scout', 'Indian'),
+  ('Yuki Takahashi', 'Recruiter', 'Japanese'),
+  ('Olivia Smith', 'Scout', 'Australian'),
+  ('Mohamed Al Fayed', 'Recruiter', 'Egyptian'),
+  ('Carlos Rodriguez', 'Scout', 'Mexican'),
+  ('Anna Ivanova', 'Recruiter', 'Russian'),
+  ('Daniel Okeke', 'Scout', 'Nigerian'),
+  ('Sara Johansson', 'Recruiter', 'Swedish'),
+  ('Chen Wei', 'Scout', 'Chinese');
+
+
+INSERT INTO Club_Administration (Admin_Name, Position, Department)
+VALUES 
+  ('Emma Johnson', 'Admin Assistant', 'Operations'),
+  ('Michael Brown', 'Finance Manager', 'Finance'),
+  ('Sarah Wilson', 'HR Manager', 'Human Resources'),
+  ('David Smith', 'Marketing Director', 'Marketing'),
+  ('Rachel Jones', 'Facilities Manager', 'Facilities');
+  
+  INSERT INTO Player_Match (Player_ID, Match_ID) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 1),
+(5, 2),
+(6, 3),
+(7, 1),
+(8, 2),
+(9, 3),
+(10, 1),
+(11, 2),
+(12, 3),
+(13, 1),
+(14, 2),
+(15, 3),
+(1, 4),
+(2, 5),
+(3, 6),
+(4, 7),
+(5, 8),
+(6, 4),
+(7, 5),
+(8, 6),
+(9, 7),
+(10, 8),
+(11, 4),
+(12, 5),
+(13, 6),
+(14, 7),
+(15, 8),
+(1, 5),
+(2, 6),
+(3, 7),
+(4, 8),
+(5, 4),
+(6, 9),
+(7, 10),
+(8, 11),
+(9, 12),
+(10, 13),
+(11, 9),
+(12, 10),
+(13, 11),
+(14, 12),
+(15, 13),
+(1, 9),
+(2, 10),
+(3, 11),
+(4, 12),
+(5, 13),
+(6, 10),
+(7, 11),
+(8, 12),
+(9, 13),
+(11, 14),
+(12, 15),
+(13, 16),
+(14, 17),
+(15, 18),
+(1, 14),
+(2, 15),
+(3, 16),
+(4, 17),
+(5, 18),
+(6, 14),
+(7, 15),
+(8, 16),
+(9, 17),
+(10, 18),
+(11, 15),
+(12, 16),
+(13, 17),
+(14, 18),
+(15, 14);
+
+INSERT INTO Coaching_Staff_Matches (Staff_ID, Match_ID) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(1, 6),
+(2, 7),
+(3, 8),
+(4, 9),
+(5, 10);
+
+INSERT INTO Marketing_Promotions (Campaign_Name, Campaign_Description, Start_Date, End_Date) VALUES
+('Summer Sale', 'Special discounts on merchandise for the summer season.', '2024-06-01', '2024-06-30'),
+('Back to School Campaign', 'Promotions on school-themed merchandise for the new school year.', '2024-08-15', '2024-09-15'),
+('Holiday Giveaway', 'Giveaways and contests during the holiday season.', '2024-11-20', '2024-12-31'),
+('New Year Special', 'Exclusive offers to kick off the new year.', '2025-01-01', '2025-01-31'),
+('Spring Clearance', 'Clearance sale on last season’s merchandise.', '2025-04-01', '2025-04-30');
+
+INSERT INTO Marketing_Matches (Campaign_ID, Match_ID) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(3, 4),
+(3, 5),
+(4, 6), 
+(5, 7), 
+(5, 8), 
+(5, 9), 
+(5, 10); 
+
+INSERT INTO Community_Outreach (Event_Name, Event_Description, Event_Date, Location) VALUES
+  ('Local Park Cleanup', 'Volunteer cleanup of the local park to promote environmental stewardship.', '2024-05-10', 'Manchester'),
+  ('Youth Football Clinic', 'Free football clinic for children aged 6-12 to learn basic skills and sportsmanship.', '2024-06-15', 'London'),
+  ('Charity Fun Run', 'Participation in a charity fun run to raise funds for a local children''s hospital.', '2024-07-20', 'Birmingham'),
+  ('Senior Citizens Day', 'An event to honor and celebrate senior citizens in the community with activities and entertainment.', '2024-08-25', 'Glasgow'),
+  ('Food Drive', 'Collection and distribution of food items to families in need within the community.', '2024-09-30', 'Liverpool');
+
+
+
+
+
+
+
+
