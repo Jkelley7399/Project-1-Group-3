@@ -7,12 +7,75 @@ Lucas Hoffmann
 Jackson Kelley  
 Fumi Ogundare
 
+# Project Overview:
+
+Our team has developed a comprehensive Soccer Club Management System aimed at enhancing the club's efficiency, performance, and reputation across various facets, including player management, team operations, financial tracking, facility utilization, community engagement, fan interaction, and marketing activities. This system serves as a robust tool for decision-making, resource allocation, and strategic planning within the organization.
+
 
 # The Data Model:
 
 ![image](https://github.com/Jkelley7399/Project-1-Group-3/assets/158102955/047d877d-afe8-412c-ab97-93e59a613fca)
 
 This data model facilitates the efficient management of all aspects of the club, including player performance, team operations, financial management, facility utilization, community engagement, fan interaction, and marketing activities. It allows for better decision-making, resource allocation, and strategic planning to enhance the overall performance and reputation of the club.
+
+# Relationships:  
+
+# Players:
+
+Players to Players_has_Matches: This shows a many-to-many relationship via an associative entity, meaning that players can participate in many matches, and each match can involve many players.
+
+
+Players to Medical Records: a one-to-one relationship, as each player would have a unique medical record.
+
+
+Players to Scouting and Recruitment: a one-to-many relationship, as each scout can be linked to many players.
+
+
+# Matches:
+
+Matches to Players_has_Matches: Many-to-many with players, as explained earlier.
+
+
+Matches to Team Finances: A one-to-many relationship where one match can be related to multiple financial records.
+
+
+Matches to Fan Engagement: a one-to-many relationship; one match could have multiple fan engagement activities.
+
+
+Matches to marketing and Promotions_has_Matches: A many-to-many relationship with marketing and promotions campaigns.
+
+
+Matches to Coaching Staff_has_Matches: This implies that coaching staff can be associated with many matches and vice versa, hence a many-to-many relationship.
+
+
+# Coaching Staff to Coaching Staff_has_Matches:
+
+Many-to-many relationships, as explained earlier.
+
+
+# Facilities:
+
+Facilities to Matches: a one-to-many relationship, indicating that one facility can host multiple matches.
+
+
+Facilities to marketing and Promotions_has_Matches: Indicates a many-to-many relationship through the associative entity.
+
+
+# marketing and Promotions:
+
+
+# marketing and Promotions to marketing and Promotions_has_Matches: 
+
+Many-to-many relationship as mentioned.
+
+# Scouting and Recruitment:
+
+Scouting and Recruitment to Players: As mentioned before, a one-to-many relationship.
+
+# Youth Academy:
+
+Youth Academy to Players: Suggesting that players can be a part of a youth academy, a one-to-many relationship.
+
 
 # Data Dictionary:
 
@@ -137,6 +200,20 @@ Overall, Query 10 plays a crucial role in player performance analysis, strategic
 
 ------------------------------------------------------------------------------------------------------------------
 
+# Final Deliverable:
 
+The Soccer Club Management System developed by our team represents a significant milestone in optimizing the club's operations and fostering its growth and success. With its intuitive interface, robust data model, and powerful querying capabilities, the system empowers club administrators, coaches, and stakeholders to make informed decisions, streamline processes, and drive performance improvements across all aspects of club management.
+
+## Benefits:
+
+Enhanced Decision-Making: Access to comprehensive data and analytics empowers club stakeholders to make informed decisions regarding player selection, match scheduling, resource allocation, and strategic planning.
+
+Improved Performance: By tracking player performance, injuries, and fitness levels, the system enables coaches to optimize training programs, tactics, and team compositions to enhance on-field performance and results.
+
+Efficient Operations: Streamlined processes for match scheduling, facility management, scouting, recruitment, and financial tracking ensure efficient club operations and resource utilization.
+
+Enhanced Fan Engagement: Through targeted marketing campaigns, fan interaction initiatives, and community outreach programs, the system helps foster stronger connections with fans, driving loyalty and support for the club.
+
+Financial Management: Accurate tracking of team finances, revenue sources, and expenses enables effective budgeting, financial planning, and revenue generation strategies to ensure the club's long-term sustainability and growth.
 
 
